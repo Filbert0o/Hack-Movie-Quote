@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import movieQuotes from 'movie-quotes';
+import Question from './components/Question';
 
 class App extends Component {
   render() {
     console.log(movieQuotes)
     let quotes = movieQuotes.all.map((quote, index) => {
       return (
-        <li className="list-group-item" key={index} id={index} >{quote}</li>
+        <Question key={index} id={index} content={quote} />
       )
     });
 
