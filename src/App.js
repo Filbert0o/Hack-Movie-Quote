@@ -6,9 +6,9 @@ import movieQuotes from 'movie-quotes';
 class App extends Component {
   render() {
     console.log(movieQuotes)
-    let quotes = movieQuotes.all.map((quote) => {
+    let quotes = movieQuotes.all.map((quote, index) => {
       return (
-        <div>{quote}</div>
+        <li className="list-group-item" key={index} id={index} >{quote}</li>
       )
     });
 
@@ -21,7 +21,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        {quotes}
+        <ul className="list-group">
+          {quotes}
+        </ul>
       </div>
     );
   }
