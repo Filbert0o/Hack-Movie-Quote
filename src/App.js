@@ -12,19 +12,34 @@ class App extends Component {
   }
 
   render() {
-    let quotes = movieQuotes.all.map((quote, index) => {
+    let quotes = movieQuotes.all.map((question, index) => {
+      let split = question.split('"')
+      let quote = split[1]
+      let movie = split[2]
       return (
         <Question
           key={index}
           id={index}
-          content={quote}
+          quote={quote}
+          movie={movie}
         />
       )
     });
 
     let quote = quotes[this.getQuote()]
+    let movie = quote.props.movie
+    let movies = [movie]
+    for (var i = 0; i < 3; i++) {
+      movies.push(quotes[this.getQuote()].props.movie)
+    }
 
-    return (
+    let moviesList = movies.sort().map((title) => {
+      return (
+        <li>{title}</li>
+      )
+    })
+
+return (
       <div className="App">
         <header className="App-header">
           <img src={logo} alt="logo" className="App-logo"/>
@@ -32,6 +47,9 @@ class App extends Component {
         </header>
         <ul className="list-group">
           {quote}
+        </ul>
+        <ul>
+          {moviesList}
         </ul>
       </div>
     );
