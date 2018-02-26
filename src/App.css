@@ -22,6 +22,18 @@
   font-size: large;
 }
 
+.answer:hover {
+background-color: yellow;
+}
+
+.wrong {
+background-color: darkred;
+}
+
+.right {
+background-color: limegreen;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

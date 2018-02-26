@@ -11,11 +11,25 @@ class App extends Component {
     return num
   }
 
+
   render() {
+    var score = ""
+    var answer = "answer"
+
+    let checkAnswer = (value) => {
+      if (value === quote.props.movie) {
+        answer = "right"
+        score = "Correct!  You're the smartest person alive!"
+      } else {
+        answer = "wrong"
+        score = "Wrong!  Ya big dumb idiot!"
+      }
+    }
+
     let quotes = movieQuotes.all.map((question, index) => {
       let split = question.split('"')
-      let quote = split[1]
-      let movie = split[2]
+      var quote = split[1]
+      var movie = split[2]
       return (
         <Question
           key={index}
@@ -33,9 +47,9 @@ class App extends Component {
       movies.push(quotes[this.getQuote()].props.movie)
     }
 
-    let moviesList = movies.sort().map((title) => {
+    let moviesList = movies.sort().map((title, index) => {
       return (
-        <li>{title}</li>
+        <button id={index} className={answer} onClick={checkAnswer} value={title}>{title}</button>
       )
     })
 
@@ -51,6 +65,9 @@ return (
         <ul>
           {moviesList}
         </ul>
+        <div>
+          {score}
+        </div>
       </div>
     );
   }
