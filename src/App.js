@@ -5,26 +5,28 @@ import movieQuotes from 'movie-quotes';
 import Question from './components/Question';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      score: "wrong",
+      answer: "answer"
+    }
+    this.checkAnswer=this.checkAnswer.bind(this)
+    this.getQuote=this.getQuote.bind(this)
+  }
 
   getQuote() {
     let num = Math.floor(Math.random() * Math.floor(100));
     return num
   }
 
+  checkAnswer() {
+    this.setState( { answer: "wrong",
+    score: "Wrong!  Ya big dumb idiot!" }
+    );
+  }
 
   render() {
-    var score = ""
-    var answer = "answer"
-
-    let checkAnswer = (value) => {
-      if (value === quote.props.movie) {
-        answer = "right"
-        score = "Correct!  You're the smartest person alive!"
-      } else {
-        answer = "wrong"
-        score = "Wrong!  Ya big dumb idiot!"
-      }
-    }
 
     let quotes = movieQuotes.all.map((question, index) => {
       let split = question.split('"')
@@ -49,7 +51,7 @@ class App extends Component {
 
     let moviesList = movies.sort().map((title, index) => {
       return (
-        <button id={index} className={answer} onClick={checkAnswer} value={title}>{title}</button>
+        <button id={index} className={this.state.answer} onClick={this.checkAnswer}>{title}</button>
       )
     })
 
@@ -66,7 +68,7 @@ return (
           {moviesList}
         </ul>
         <div>
-          {score}
+          {this.state.score}
         </div>
       </div>
     );
