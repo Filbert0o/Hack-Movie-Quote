@@ -26,9 +26,6 @@ class App extends Component {
       this.setState( { answer: "right",
       score: "Correct!  You're the smartest person alive!" }
       );
-    this.setState( { answer: "wrong",
-    score: "Wrong!  Ya big dumb idiot!" }
-    );
   } else {
     this.setState( { answer: "wrong",
     score: "Wrong!  Ya big dumb idiot!" }
