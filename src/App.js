@@ -8,8 +8,9 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      score: "wrong",
-      answer: "answer"
+      score: "",
+      answer: "answer",
+      quote: ""
     }
     this.checkAnswer=this.checkAnswer.bind(this)
     this.getQuote=this.getQuote.bind(this)
@@ -20,10 +21,19 @@ class App extends Component {
     return num
   }
 
-  checkAnswer() {
+  checkAnswer(title) {
+    if (title === this.state.quote) {
+      this.setState( { answer: "right",
+      score: "Correct!  You're the smartest person alive!" }
+      );
     this.setState( { answer: "wrong",
     score: "Wrong!  Ya big dumb idiot!" }
     );
+  } else {
+    this.setState( { answer: "wrong",
+    score: "Wrong!  Ya big dumb idiot!" }
+    );
+  }
   }
 
   render() {
@@ -50,8 +60,10 @@ class App extends Component {
     }
 
     let moviesList = movies.sort().map((title, index) => {
+
+      let handleClick = () => { this.checkAnswer({title}) }
       return (
-        <button id={index} className={this.state.answer} onClick={this.checkAnswer}>{title}</button>
+        <button id={index} className={this.state.answer} onClick={handleClick}>{title}</button>
       )
     })
 
